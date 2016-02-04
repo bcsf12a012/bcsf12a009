@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+
+    <title>@ViewBag.Title </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/customise.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Notic Board</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li ><a href="/Teacher/MyAnnoncment">My Announcments</a></li>
+                    <li><a href="/Teacher/AllAnnouncment">All Announcments</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input class="form-control" placeholder="Search" type="text">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/home/Logout">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section>
+        <div class="container-fluid">
+
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div class="list-group">
+                        
+                        <a href="/Teacher/MyAnnoncment" class="list-group-item "><i class="glyphicon glyphicon-dashboard"> </i> My Announcments</a>
+                        <a href="/Teacher/AllAnnouncment" class="list-group-item"><i class="glyphicon glyphicon-dashboard"> </i> All Announcments</a>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <br />
+                    <br />
+                    @RenderBody()
+
+                    <footer>
+                        <p class="text-center">&copy;@DateTime.Now.Year-By Yawar Shahid</pclass>
+                    </footer>
+
+
+                </div>
+
+                <div class="col-md-2">
+
+
+
+                </div>
+
+                <div class="media Mynews">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+
+
+
+                    <div class="well ">
+                        <h4> News:</h4>
+                        <form role="form">
+                            This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news This is news
+                            <hr />
+                            <button type="submit" class="btn btn-primary ">Read More</button>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+            <hr />
+
+        </div>
+
+
+
+    </section>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+</body>
+</html>

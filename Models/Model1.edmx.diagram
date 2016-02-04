@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5c2503988be548aeadad6324c7724085" Name="Diagram1">
+        <EntityTypeShape EntityType="Models.Announcment2" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.comment" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Klass" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.like_table" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.user_enrolled_in_classes2" Width="1.5" PointX="6" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.user_table" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK_Announcment_User" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_comment_user_table" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_user_enrolled_in_classes2_Klass" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_like_table_User_table" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_user_enrolled_in_classes2_user2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

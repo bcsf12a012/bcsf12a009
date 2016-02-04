@@ -1,0 +1,50 @@
+﻿@model Notic_board_2.Models.Announcment2
+
+@{
+    ViewBag.Title = "MyAnnouncementEdit";
+    Layout = "~/Views/Shared/_LayoutHomePageTeacher.cshtml";
+}
+
+<form class="form-signin" action="/home/index" method="post">
+    <h2 class="form-signin-heading text-center">@ViewBag.formTitle</h2>
+
+    <h2>MyAnnouncementEdit</h2>
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-horizontal">
+            <h4>AnnouncmentBO</h4>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+
+        @Html.ActionLink("Back to Myannouncment", "MyAnnoncment", "Teacher", new { @class = "btn btn-primary" })
+
+    </div>
+<hr />
+</form>

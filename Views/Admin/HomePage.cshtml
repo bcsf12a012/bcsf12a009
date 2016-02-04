@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Notic_board_2.Models.Klass>
+
+@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    ViewBag.colSize = "col-md-10";
+    ViewBag.colSize2 = "col-md-0";
+
+}
+
+
+
+@section SearchBar{
+
+    <form class="navbar-form navbar-left" role="search" action="/Admin/HomePage" method="post">
+        <div class="form-group">
+            <input class="form-control" id="KlassSearch" name="searchTerm" placeholder="Search" type="text">
+        </div>
+        <button type="submit" class="btn btn-default" id="klassSerachbtn">Submit</button>
+    </form>
+
+
+}
+<h2>HomePage</h2>
+@Html.ActionLink("Create", "klassCreate", "Admin", new { @class = "btn btn-primary Create_button", name = "Id", method = "get" })
+
+
+<div class="well">
+    <table class="table" id="klassTbl">
+        <tr>
+            <th>
+                <text>Name</text>
+            </th>
+            <th>
+                <text>Degree</text>
+
+
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <text> @item.Name</text>
+                </td>
+                <td>
+                    <text> @item.Degree</text>
+
+                </td>
+                <td>
+
+
+                    @Html.ActionLink("Edit", "klassEdit", "admin", new { id = item.Id, @class = "btn btn-primary" }, null)
+
+                    @Html.ActionLink("Delete", "klassDelete", "Admin", new { @class = "btn btn-primary", id = item.Id }, null)
+
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+
+<script>
+
+
+
+
+    $(document).ready(function () {
+
+        $('#KlassSearch').autocomplete({
+
+            source: '@Url.Action("GetKlass")'
+        })
+
+
+
+        @*$('#klassSerachbtn').click(function(){
+
+            var input =$('#KlassSearch').val();
+
+            $.getJSON("/Admin/homepage?UserNameKey=" + input, function (item) {
+
+                if(item)
+                {
+                    var tbl = $('#klassTbl');
+                    s = '';
+
+                    s += "<tr>   <th>         <text>Name</text>              </th>              <th>                  <text>Degree</text>                            </th>              <th></th>          </tr> ";
+                    for (var i=0; i<data.length;i++)                    {
+                                                  s+= "<tr>                            <td>                                <text>"+
+                                                      item.Name+"</text>                            </td>                            <td>                                <text>"+
+                                                      item.Degree+"</text>                                              </td>                            <td>                          "+
+                                                  +'<a href="/admin/klassedit" class = "btn btn-primaryid" = '+item.Id+'>'
+                                                //  Html.ActionLink +'("Edit", "klassEdit", "admin", new { id ='+ item.Id+', @class = "btn btn-primary"}, null)         '+
+                                                   +'<a href="/admin/klassedit" class = "btn btn-primaryid" = '+item.Id+'>'
+                                                  //  Html.ActionLink+'("Delete", "klassDelete", "Admin", new { @class = "btn btn-primary", id = '+
+                                                  //item.Id +'},null)                                              </td>                        </tr>                    }                    ';
+
+
+                    }
+
+                    tbl.html(s);
+
+            });
+
+
+        });*@
+
+    });
+</script>

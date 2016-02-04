@@ -1,0 +1,29 @@
+﻿@model Notic_board_2.Models.user_table
+@{
+    
+    ViewBag.title = "Sign in";
+    ViewBag.link = "/home/index";
+    ViewBag.formTitle = "Sign in";
+    ViewBag.submitButton = "Sign in";
+
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+    
+}
+
+
+
+
+
+
+
+<form class="form-signin" action="/home/index" method="post">
+    <h2 class="form-signin-heading text-center">@ViewBag.formTitle</h2>
+
+    <label for="inputEmail" class="sr-only">User Name address</label>
+    <input type="text" value="yawarA" id="userName" name="User_name" class="form-control " placeholder="User Name" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" value="123" id="inputPassword" name="Password" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">@ViewBag.submitButton</button>
+    <hr />
+
+</form>

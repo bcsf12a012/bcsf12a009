@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Announcment2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="userId" Type="int" />
+          <Property Name="NoOfLikes" Type="int" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="anouncment_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="description" Type="varchar" MaxLength="50" />
+          <Property Name="User_pic" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Klass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Degree" Type="varchar" MaxLength="50" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="like_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="announcment_id" Type="int" />
+          <Property Name="user_id" Type="int" />
+        </EntityType>
+        <EntityType Name="user_enrolled_in_classes2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="klass_id" Type="int" />
+        </EntityType>
+        <EntityType Name="user_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" />
+          <Property Name="User_name" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="Roll_no" Type="varchar" MaxLength="50" />
+          <Property Name="ImageUrl" Type="varchar" MaxLength="100" />
+          <Property Name="Date" Type="date" />
+        </EntityType>
+        <Association Name="FK_Announcment_User">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Announcment2" Type="Self.Announcment2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Announcment2">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user_table">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_like_table_User_table">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="like_table" Type="Self.like_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="like_table">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_enrolled_in_classes2_Klass">
+          <End Role="Klass" Type="Self.Klass" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_enrolled_in_classes2" Type="Self.user_enrolled_in_classes2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klass">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user_enrolled_in_classes2">
+              <PropertyRef Name="klass_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_enrolled_in_classes2_user2">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_enrolled_in_classes2" Type="Self.user_enrolled_in_classes2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user_enrolled_in_classes2">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Announcment2" EntityType="Self.Announcment2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klass" EntityType="Self.Klass" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="like_table" EntityType="Self.like_table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_enrolled_in_classes2" EntityType="Self.user_enrolled_in_classes2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_table" EntityType="Self.user_table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Announcment_User" Association="Self.FK_Announcment_User">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="Announcment2" EntitySet="Announcment2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user_table" Association="Self.FK_comment_user_table">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_like_table_User_table" Association="Self.FK_like_table_User_table">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="like_table" EntitySet="like_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_enrolled_in_classes2_Klass" Association="Self.FK_user_enrolled_in_classes2_Klass">
+            <End Role="Klass" EntitySet="Klass" />
+            <End Role="user_enrolled_in_classes2" EntitySet="user_enrolled_in_classes2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_enrolled_in_classes2_user2" Association="Self.FK_user_enrolled_in_classes2_user2">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="user_enrolled_in_classes2" EntitySet="user_enrolled_in_classes2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Announcment2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="NoOfLikes" Type="Int32" />
+          <NavigationProperty Name="user_table" Relationship="Self.FK_Announcment_User" FromRole="Announcment2" ToRole="user_table" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anouncment_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user_table" Relationship="Self.FK_comment_user_table" FromRole="comment" ToRole="user_table" />
+          <Property Name="User_pic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Klass">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Degree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user_enrolled_in_classes2" Relationship="Self.FK_user_enrolled_in_classes2_Klass" FromRole="Klass" ToRole="user_enrolled_in_classes2" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="like_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="announcment_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
+          <NavigationProperty Name="user_table" Relationship="Self.FK_like_table_User_table" FromRole="like_table" ToRole="user_table" />
+        </EntityType>
+        <EntityType Name="user_enrolled_in_classes2">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="klass_id" Type="Int32" />
+          <NavigationProperty Name="Klass" Relationship="Self.FK_user_enrolled_in_classes2_Klass" FromRole="user_enrolled_in_classes2" ToRole="Klass" />
+          <NavigationProperty Name="user_table" Relationship="Self.FK_user_enrolled_in_classes2_user2" FromRole="user_enrolled_in_classes2" ToRole="user_table" />
+        </EntityType>
+        <EntityType Name="user_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Roll_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Announcment2" Relationship="Self.FK_Announcment_User" FromRole="user_table" ToRole="Announcment2" />
+          <NavigationProperty Name="comments" Relationship="Self.FK_comment_user_table" FromRole="user_table" ToRole="comment" />
+          <NavigationProperty Name="like_table" Relationship="Self.FK_like_table_User_table" FromRole="user_table" ToRole="like_table" />
+          <NavigationProperty Name="user_enrolled_in_classes2" Relationship="Self.FK_user_enrolled_in_classes2_user2" FromRole="user_table" ToRole="user_enrolled_in_classes2" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Announcment_User">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Announcment2" Type="Self.Announcment2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Announcment2">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_comment_user_table">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_enrolled_in_classes2_Klass">
+          <End Role="Klass" Type="Self.Klass" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_enrolled_in_classes2" Type="Self.user_enrolled_in_classes2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klass">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user_enrolled_in_classes2">
+              <PropertyRef Name="klass_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_like_table_User_table">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="like_table" Type="Self.like_table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="like_table">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_user_enrolled_in_classes2_user2">
+          <End Role="user_table" Type="Self.user_table" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="user_enrolled_in_classes2" Type="Self.user_enrolled_in_classes2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_table">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="user_enrolled_in_classes2">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Notice_boardEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Announcment2" EntityType="Self.Announcment2" />
+          <EntitySet Name="comments" EntityType="Self.comment" />
+          <EntitySet Name="Klasses" EntityType="Self.Klass" />
+          <EntitySet Name="like_table" EntityType="Self.like_table" />
+          <EntitySet Name="user_enrolled_in_classes2" EntityType="Self.user_enrolled_in_classes2" />
+          <EntitySet Name="user_table" EntityType="Self.user_table" />
+          <AssociationSet Name="FK_Announcment_User" Association="Self.FK_Announcment_User">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="Announcment2" EntitySet="Announcment2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_comment_user_table" Association="Self.FK_comment_user_table">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="comment" EntitySet="comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_enrolled_in_classes2_Klass" Association="Self.FK_user_enrolled_in_classes2_Klass">
+            <End Role="Klass" EntitySet="Klasses" />
+            <End Role="user_enrolled_in_classes2" EntitySet="user_enrolled_in_classes2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_like_table_User_table" Association="Self.FK_like_table_User_table">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="like_table" EntitySet="like_table" />
+          </AssociationSet>
+          <AssociationSet Name="FK_user_enrolled_in_classes2_user2" Association="Self.FK_user_enrolled_in_classes2_user2">
+            <End Role="user_table" EntitySet="user_table" />
+            <End Role="user_enrolled_in_classes2" EntitySet="user_enrolled_in_classes2" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="Notice_boardEntities2">
+          <EntitySetMapping Name="Announcment2">
+            <EntityTypeMapping TypeName="Models.Announcment2">
+              <MappingFragment StoreEntitySet="Announcment2">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="NoOfLikes" ColumnName="NoOfLikes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comments">
+            <EntityTypeMapping TypeName="Models.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="User_pic" ColumnName="User_pic" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="anouncment_id" ColumnName="anouncment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klasses">
+            <EntityTypeMapping TypeName="Models.Klass">
+              <MappingFragment StoreEntitySet="Klass">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="like_table">
+            <EntityTypeMapping TypeName="Models.like_table">
+              <MappingFragment StoreEntitySet="like_table">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="announcment_id" ColumnName="announcment_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_enrolled_in_classes2">
+            <EntityTypeMapping TypeName="Models.user_enrolled_in_classes2">
+              <MappingFragment StoreEntitySet="user_enrolled_in_classes2">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="klass_id" ColumnName="klass_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_table">
+            <EntityTypeMapping TypeName="Models.user_table">
+              <MappingFragment StoreEntitySet="user_table">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="User_name" ColumnName="User_name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Roll_no" ColumnName="Roll_no" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

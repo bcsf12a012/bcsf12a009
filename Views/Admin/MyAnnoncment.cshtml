@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Notic_board_2.Models.Announcment2>
+
+@{
+    ViewBag.Title = "MyAnnoncment";
+    Layout = "~/Views/Shared/_LayoutHomePage.cshtml";
+    ViewBag.colSize = "col-md-6";
+   
+
+
+}
+
+
+@section SearchBar{
+
+    <form class="navbar-form navbar-left" role="search" action="#" method="post">
+        <div class="form-group">
+            <input class="form-control" id="KlassSearch" name="searchTerm" placeholder="Search" type="text">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+
+}
+
+
+
+
+<h2>MyAnnoncment</h2>
+
+
+<div class="well">
+    <form role="form">
+
+        <div class="form-group">
+            <textarea class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <hr>
+</div>
+
+
+@foreach (var item in Model)
+{
+
+
+    <div class="panel panel-default ">
+
+        <h3>  @item.title <br /> </h3>
+
+        <div class="panel-body">
+
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="~/@ViewBag.AdminPic.ImageUrl" width="64" height="64" alt="pic">
+                    </a>
+                </div>
+                <div class="media-body">
+
+                    @item.description
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <p>
+            <div class="text-left btn btn-primary"> @item.NoOfLikes  Likes </div>
+
+            <div class="text-right">
+                @Html.ActionLink("Edit", "MyAnnouncementEdit", "Teacher", new { @class = "btn btn-primary", name = "Id" })
+                @Html.ActionLink("Delete", "MyAnnouncementDelete", "Teacher", new { @class = "btn btn-primary", name = "Id" })
+
+
+
+
+            </div>
+        </p>
+
+
+        <div class="panel-footer">
+
+            <h4>Leave a Comment:</h4>
+            <!-- <form role="form" action="/Home/IsertComment">   -->
+            <form role="form">
+
+                <div class="form-group">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <hr>
+            
+    
+
+            
+            @foreach (var b in ViewBag.comments)
+            {
+                <div class="media">
+                    <div class="media-left">
+
+                        <a href="#">
+                            <img class="media-object" src="~/@b.User_pic" width="64" height="64" alt="pic">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                       <text>   @b.description  </text>
+                    </div>
+                </div>
+                <hr>
+              
+               
+                
+            }
+
+            <hr>
+
+        </div>
+
+    </div>
+
+    <br />
+}
+
+
+

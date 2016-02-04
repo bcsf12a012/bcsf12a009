@@ -1,0 +1,80 @@
+﻿@model Notic_board_2.Models.user_table
+
+@{
+    ViewBag.Title = "TeacherEdit";
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+}
+
+<form class="form-signin" action="/admin/TeacherEdit" method="post">
+    <h2 class="form-signin-heading text-center">@ViewBag.formTitle</h2>
+
+    <h2>TeacherEdit</h2>
+
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-horizontal">
+            <h4>user_table</h4>
+            <hr />
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.First_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.First_name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Last_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Last_name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.User_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.User_name, new { htmlAttributes = new { @class = "form-control", id = "VerifyUser" } })
+                    <h4> <span id="checking">Checking...</span></h4>
+                    <h4>  <span id="result"></span></h4>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to Teacher", "TeacherPanel", "Admin", new { @class = "btn btn-primary" })
+
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <hr />
+</form>

@@ -1,0 +1,204 @@
+﻿@model Notic_board_2.Models.Klass
+
+@{
+    ViewBag.Title = "klass Create";
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+    ViewBag.link = "/Admin/klassCreate";
+    ViewBag.formTitle = "Create Class";
+}
+
+
+
+
+<form class="form-signin" id="classForm" action="/admin/klassCreate" method="post">
+    <h2 class="form-signin-heading text-center">@ViewBag.formTitle</h2>
+
+
+    <div class="form-horizontal">
+        <h4>klass</h4>
+        <hr />
+        <div class="form-group">
+
+
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "VerifyInput" } })
+                <h4> <span id="checking">Checking...</span></h4>
+                <h4>  <span id="result"></span></h4>
+                <h4> <span id="checking1">Please enter Class Name</span></h4>
+
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Degree, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Degree, new { htmlAttributes = new { @class = "form-control", id = "Degree" } })
+                <h4> <span id="checking2">Please enter Degree Name</span></h4>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" name="DateTime" id="_date" class="form-control" />
+                <h4> <span id="checking3">Please enter Date</span></h4>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" value="Create" class="btn btn-default" id="createKlass"  />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        @Html.ActionLink("Back to classes", "HomePage", "Admin", new { @class = "btn btn-primary" })
+
+    </div>
+    <hr />
+</form>
+
+
+@section validation
+{
+   $('#Degree').on("blur",function () {
+                var degree = $('#Degree').val();
+                if (degree.length != 0)
+
+                    $('#checking2').hide();
+
+            });
+
+            $('#_date').on("blur",function () {
+                var Date = $('#_date').val();
+                if (Date.length != 0)
+
+                    $('#checking3').hide();
+
+            });
+
+
+            $('#createKlass').on("click", function (e) {
+
+                //var name = $('VerifyInput').val();
+                //var degree = $('Degree').val();
+                //var Date = $('_date').val();
+
+                //alert("button");
+
+                //if (name.length == 0) {
+                //    alert("zzzzzzzzz1");
+                //    $('#checking1').show();
+                //}
+                //if (degree.length == 0) {
+                //    alert("zzzzzzzzz2");
+                //    $('#checking2').show();
+                //}
+                //if (Date.length == 0) {
+                //    alert("zzzzzzzzz3");
+                //    $('#checking3').show();
+                //}
+                //if (name.length != 0 && degree.length != 0 && Date.length != 0)
+                //{
+                //    alert("zzzzzzzzz");
+                //$.ajax("klassCreate/admin");
+                //}
+
+
+
+
+
+
+
+                var isValid = true;
+
+                $('input[type="text"]').each(function () {
+
+                    if ($.trim($(this).val()) == '') {
+
+                        isValid = false;
+
+                        $(this).css({
+                            "border": "1px solid red",
+                            "background": "#FFCECE"
+                        });
+                    }
+                    else {
+
+                        $(this).css({
+
+                            "border": "",
+
+                            "background": ""
+
+                        });
+                        if(isValid==true)
+                            $("input[type=submit]").removeAttr('disabled');
+                        else
+                            $("input[type=submit]").attr('disabled', 'disabled');
+                    }
+
+                });
+
+                if (isValid == false)
+                    e.preventDefault();
+                else {
+                   // alert('Thank you for submitting');
+
+                    $('#classForm').submit();
+
+
+                    // $.ajax("klassCreate/admin");
+@*@Url.Action("klassCreate")*@
+                    // $.post("/admin/klassCreate");
+
+
+@*var name = $('VerifyInput').val();
+    var degree = $('Degree').val();
+    var date = $('_date').val();
+
+    var clas = {
+        Name: name,
+        Degree: degree,
+        Date: date
+
+    }
+
+    $.ajax(
+             {
+            type: "POST",
+
+            data : JSON.stringify(clas),
+            url: '@Url.Action("klassCreate", "admin")',
+
+            success: function (result) {
+
+            },
+            error: function (x, e) {
+
+            }
+        });*@
+
+                }
+
+
+
+
+
+            });
+
+         
+
+
+            $('#checking1').hide();
+            $('#checking2').hide();
+            $('#checking3').hide();
+}   

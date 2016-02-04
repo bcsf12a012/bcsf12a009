@@ -1,0 +1,152 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+    <title>@ViewBag.Title </title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href='//fonts.googleapis.com/css?family=Londrina+Solid|Coda+Caption:800|Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="~/Content/login.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+  
+</head>
+
+<body>
+    <div class="container">
+
+
+        @RenderBody()
+
+
+    </div> <!-- /container -->
+
+    <footer>
+        <p class="text-center">&copy; @DateTime.Now.Year -By Yawar Shahid</p>
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/customise.js"></script>
+
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+
+
+    <script>
+
+
+        $(document).ready(function () {
+
+         //   alert("ready");
+
+
+         
+            @RenderSection("validation",required:false);
+
+           
+
+
+
+
+
+            $('#checking').hide();
+            //alert("aaaaaaaaaaaaaaa");
+
+
+
+            $('#_date').datepicker({ dateFormat: 'mm/dd/yy' });
+
+
+            $('#VerifyInput').on("blur", function () {
+                //  alert("blur");
+
+               // if ($('VerifyInput').val().length != 0)
+
+                 //   $('#checking1').hide();
+
+
+                var input = $('#VerifyInput').val();
+                if (!input)
+                {
+                    $('#result').text("Please Enter a Class Name");
+                }
+                else {
+                    //alert(' Name = ' + input);
+                    $('#checking').show();
+                    $.getJSON("/Admin/CheckklassName?klassNameKey=" + input, function (data) {
+                        $('#checking').hide();
+                        if (data) {
+
+                            $("input[type=submit]").removeAttr('disabled');
+                            $('#result').text("Class Name is available");
+
+                        }
+                        else {
+                            $("input[type=submit]").attr('disabled', 'disabled');
+
+                            $('#result').text("Class  already exists in database");
+                        }
+                    });
+                }
+            });
+
+
+            $('#VerifyUser').on("blur", function () {
+    //            alert("blur2");
+                var input = $('#VerifyUser').val();
+                if (!input) {
+                    $('#result').text("Please Enter a User Name");
+                   // $("input[type=submit]").attr('disabled', 'disabled');
+                }
+                else {
+                    //$("input[type=submit]").removeAttr('disabled');
+                    //alert(' Name = ' + input);
+                    $('#checking').show();
+                    $.getJSON("/Admin/CheckUserName?UserNameKey=" + input, function (data) {
+                        $('#checking').hide();
+                        if (data) {
+                            $("input[type=submit]").removeAttr('disabled');
+                            $('#result').text("User Name is available");
+
+                        }
+                        else {
+                            $("input[type=submit]").attr('disabled', 'disabled');
+                            $('#result').text("User  already exists in database");
+                        }
+                    });
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
